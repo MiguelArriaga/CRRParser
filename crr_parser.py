@@ -33,7 +33,7 @@ class CRR():
             self.__dict__ = load_json(self.crr_index_path)
         else:
             print("Creating")
-            self.articles_objs = self.load_index()
+            self.articles = self.load_index()
 
         self.always_save = always_save
         self.save()
@@ -67,18 +67,18 @@ class CRR():
     def load_index(self):
         html_text = requests.get(CRR_HOMEPAGE).text
         soup = BeautifulSoup(html_text, 'html.parser')
-        all_articles = soup.find_all("a", attrs={"text-type": "Article"})
-        all_articles_objs = {}
-        for article in all_articles:
+        all_article_objects = soup.find_all("a", attrs={"text-type": "Article"})
+        articles = {}
+        for article in all_article_objects:
             a = self.get_article_dict(article)
-            all_articles_objs[a['article_num']] = a
-        return all_articles_objs
+            articles[a['article_num']] = a
+        return articles
 
     def save(self):
         save_json(self.__dict__, self.crr_index_path)
 
     def __getitem__(self, item):
-        article = self.articles_objs.get(str(item))
+        article = self.articles.get(str(item))
         if article is None:
             raise ValueError("Could not find article. Use crr.list_articles() for full list of articles.")
         a = self.get_article_body(article, footnotes=False)
@@ -87,7 +87,7 @@ class CRR():
         return a
 
     def list_articles(self):
-        for k, a_dict in self.articles_objs.items():
+        for k, a_dict in self.articles.items():
             loaded_flag = " Loaded " if (a_dict['body_lines'] is not None) else "Unloaded"
             print(f"{k.ljust(8)} ({loaded_flag}): {a_dict['article_title']}")
 
