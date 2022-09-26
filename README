@@ -1,13 +1,15 @@
 This script is to help get CRR data from the EBA website
 
 TODOS:
- - Handle better the nested nature of the CRR articles, e.g. Article 19
+ [x] Handle better the nested nature of the CRR articles, e.g. Article 19
 
- - Place an [img] tag where images are supposed to be inserted
- - Create an image inventory to save images from the CRR website (e.g. formulas), using a unique identifier for the
+ [x] Place an [img] tag where images are supposed to be inserted
+ [x] Create an image inventory to save images from the CRR website (e.g. formulas), using a unique identifier for the
    image and then make the [img] tags refer to these images.
 
- - Place an [tbl] tag where tables are supposed to be inserted
- - Create an table inventory to save tables from the CRR website as csv files, using a unique identifier for the table
+ [ ] Place an [tbl] tag where tables are supposed to be inserted
+ [ ] Create an table inventory to save tables from the CRR website as csv files, using a unique identifier for the table
    and then make the [tbl] tags refer to these tables.
 
+ [ ] Export as pure-text with tbs
+ [ ] Export to word/ppt
